@@ -1,9 +1,7 @@
 from collections import deque
 
 
-# -------------------------------
-# 🔹 CHECK OBSTACLE
-# -------------------------------
+
 def is_obstacle(x, y, obstacles):
     for obs in obstacles:
         if (
@@ -14,9 +12,7 @@ def is_obstacle(x, y, obstacles):
     return False
 
 
-# -------------------------------
-# 🔹 VALID CELL
-# -------------------------------
+
 def is_valid(x, y, width, height, obstacles):
     return (
         0 <= x < width and
@@ -25,9 +21,7 @@ def is_valid(x, y, width, height, obstacles):
     )
 
 
-# -------------------------------
-# 🔹 BFS → NEAREST UNVISITED CELL
-# -------------------------------
+
 def bfs_to_nearest_unvisited(start, width, height, obstacles, visited):
     queue = deque([start])
     seen = set([start])
@@ -38,7 +32,7 @@ def bfs_to_nearest_unvisited(start, width, height, obstacles, visited):
     while queue:
         x, y = queue.popleft()
 
-        # 🔥 found nearest unvisited
+        
         if (x, y) not in visited and not is_obstacle(x, y, obstacles):
             path = []
             while (x, y) != start:
@@ -63,14 +57,12 @@ def bfs_to_nearest_unvisited(start, width, height, obstacles, visited):
     return []
 
 
-# -------------------------------
-# 🔥 MAIN FUNCTION (OPTIMIZED CPP)
-# -------------------------------
+
 def generate_path(width, height, obstacles):
     path = []
     visited = set()
 
-    # 🔹 find start (first free cell)
+    
     start = None
     for y in range(height):
         for x in range(width):
@@ -87,16 +79,14 @@ def generate_path(width, height, obstacles):
     path.append([current[0], current[1]])
     visited.add(current)
 
-    # 🔹 movement priority (tunable)
+    
     directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-    # right → down → left → up (good for sweeping)
+    
 
     while True:
         moved = False
 
-        # -----------------------
-        # 🔹 LOCAL GREEDY MOVE
-        # -----------------------
+        
         for dx, dy in directions:
             nx, ny = current[0] + dx, current[1] + dy
 
@@ -113,24 +103,20 @@ def generate_path(width, height, obstacles):
         if moved:
             continue
 
-        # -----------------------
-        # 🔹 GLOBAL RECONNECT (BFS)
-        # -----------------------
+       
         route = bfs_to_nearest_unvisited(
             current, width, height, obstacles, visited
         )
 
         if not route:
-            break  # all reachable cells covered
+            break  
 
         for px, py in route:
             current = (px, py)
             path.append([px, py])
             visited.add((px, py))
 
-    # -----------------------
-    # 🔍 DEBUG CHECK (optional)
-    # -----------------------
+    
     for i in range(1, len(path)):
         x1, y1 = path[i - 1]
         x2, y2 = path[i]
