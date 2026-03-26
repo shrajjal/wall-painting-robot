@@ -170,6 +170,10 @@ export default function App() {
       {/* GRID */}
       <div className="flex-1 flex justify-center items-center">
 
+          <p className="mb-4 text-gray-700 font-medium">
+            Click on boxes to create obstacles
+          </p>        
+
         <div
           className="grid gap-[3px]"
           style={{ gridTemplateColumns: `repeat(${width}, 42px)` }}
