@@ -11,9 +11,7 @@ from app.utils.logger import logger
 router = APIRouter()
 
 
-# -----------------------
-# 🔥 Generate + Save Trajectory
-# -----------------------
+
 @router.post("/trajectory")
 def create_trajectory(data: TrajectoryRequest, db: Session = Depends(get_db)):
     logger.info("Generating path...")
@@ -41,9 +39,7 @@ def create_trajectory(data: TrajectoryRequest, db: Session = Depends(get_db)):
     }
 
 
-# -----------------------
-# 🔥 Get ALL trajectories
-# -----------------------
+
 @router.get("/trajectories")
 def get_all(db: Session = Depends(get_db)):
     trajectories = db.query(Trajectory).all()
@@ -60,9 +56,7 @@ def get_all(db: Session = Depends(get_db)):
     return result
 
 
-# -----------------------
-# 🔥 Get ONE trajectory
-# -----------------------
+
 @router.get("/trajectory/{id}")
 def get_one(id: int, db: Session = Depends(get_db)):
     traj = db.query(Trajectory).filter(Trajectory.id == id).first()
@@ -79,9 +73,7 @@ def get_one(id: int, db: Session = Depends(get_db)):
     }
 
 
-# -----------------------
-# 🔥 Delete trajectory
-# -----------------------
+
 @router.delete("/trajectory/{id}")
 def delete_trajectory(id: int, db: Session = Depends(get_db)):
     traj = db.query(Trajectory).filter(Trajectory.id == id).first()
