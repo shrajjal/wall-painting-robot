@@ -14,10 +14,10 @@ export default function App() {
   const [showAll, setShowAll] = useState(false);
   const BASE_URL="https://wall-painting-robot-edx3.onrender.com";
 
-  // ---------------------------
+ 
   const sleep = (ms) => new Promise(res => setTimeout(res, ms));
 
-  // ---------------------------
+  
   const toggleObstacle = (x, y) => {
     const exists = obstacles.some(o => o.x === x && o.y === y);
 
@@ -28,7 +28,7 @@ export default function App() {
     }
   };
 
-  // ---------------------------
+  
   const animatePath = async (path) => {
     setAnimatedPath([]);
     for (let i = 0; i < path.length; i++) {
@@ -37,7 +37,7 @@ export default function App() {
     }
   };
 
-  // ---------------------------
+  
   const generatePath = async () => {
     if (isRunning) return;
 
@@ -55,13 +55,13 @@ export default function App() {
     setIsRunning(false);
   };
 
-  // ---------------------------
+  
   const fetchAll = async () => {
     const res = await axios.get(`${BASE_URL}/trajectories`);
     setSavedList(res.data.reverse());
   };
 
-  // ---------------------------
+ 
   const loadTrajectory = async (id) => {
     if (isRunning) return;
 
@@ -69,7 +69,7 @@ export default function App() {
 
     const res = await axios.get(`${BASE_URL}/trajectory/${id}`);
 
-    // 🔥 FIXES
+    
     setWidth(res.data.width);
     setHeight(res.data.height);
     setObstacles(res.data.obstacles || []);
@@ -79,18 +79,18 @@ export default function App() {
     setIsRunning(false);
   };
 
-  // ---------------------------
+  
   const deleteTrajectory = async (id) => {
     await axios.delete(`${BASE_URL}/trajectory/${id}`);
     fetchAll();
   };
 
-  // ---------------------------
+  
   useEffect(() => {
     fetchAll();
   }, []);
 
-  // ---------------------------
+  
   const totalSteps = animatedPath.length;
   const uniqueCells = new Set(animatedPath.map(p => `${p[0]}-${p[1]}`)).size;
   const revisits = totalSteps - uniqueCells;
