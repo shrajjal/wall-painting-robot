@@ -12,6 +12,7 @@ export default function App() {
 
   const [savedList, setSavedList] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const BASE_URL="https://wall-painting-robot-edx3.onrender.com";
 
   // ---------------------------
   const sleep = (ms) => new Promise(res => setTimeout(res, ms));
@@ -42,7 +43,7 @@ export default function App() {
 
     setIsRunning(true);
 
-    const res = await axios.post("http://127.0.0.1:8000/trajectory", {
+    const res = await axios.post(`${BASE_URL}/trajectory`, {
       width,
       height,
       obstacles
@@ -56,7 +57,7 @@ export default function App() {
 
   // ---------------------------
   const fetchAll = async () => {
-    const res = await axios.get("http://127.0.0.1:8000/trajectories");
+    const res = await axios.get(`${BASE_URL}/trajectories`);
     setSavedList(res.data.reverse());
   };
 
@@ -66,7 +67,7 @@ export default function App() {
 
     setIsRunning(true);
 
-    const res = await axios.get(`http://127.0.0.1:8000/trajectory/${id}`);
+    const res = await axios.get(`${BASE_URL}/trajectory/${id}`);
 
     // 🔥 FIXES
     setWidth(res.data.width);
@@ -80,7 +81,7 @@ export default function App() {
 
   // ---------------------------
   const deleteTrajectory = async (id) => {
-    await axios.delete(`http://127.0.0.1:8000/trajectory/${id}`);
+    await axios.delete(`${BASE_URL}/trajectory/${id}`);
     fetchAll();
   };
 
