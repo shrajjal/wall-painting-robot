@@ -10,7 +10,6 @@ A full-stack application that simulates an autonomous robot painting a wall whil
 * ⚙️ Backend API: https://wall-painting-robot-edx3.onrender.com
 
 ---
-## 🎥 Video Walkthrough
 
 ## 🎥 Video Walkthrough
 
