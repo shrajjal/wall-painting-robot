@@ -12,7 +12,7 @@ A full-stack application that simulates an autonomous robot painting a wall whil
 ---
 ## 🎥 Video Walkthrough
 
-![Watch the video (https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://drive.google.com/file/d/1Uzl1W3E_aVDP2LsKnYrjV5Faqidu-SaU/view?usp=sharing)
+![Watch the video ](https://drive.google.com/file/d/1Uzl1W3E_aVDP2LsKnYrjV5Faqidu-SaU/view?usp=sharing)
 ## 📌 Features
 
 ### 🧠 Path Planning
